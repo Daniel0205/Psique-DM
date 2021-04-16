@@ -16,10 +16,6 @@ jobs:
 
       warnings_are_errors: false
 
-      cache: 
-        directories:
-          - node_modules
-
       before_deploy: 
         - cd 'Back-End DM'
         - heroku container:login
