@@ -19,11 +19,8 @@ jobs:
         directories:
           - node_modules
 
-      before_install: 
-        - cd 'Back-End DM'
-        - CI=false 
-
       install:
+        - cd 'Back-End DM'
         - npm install
         
       script:
