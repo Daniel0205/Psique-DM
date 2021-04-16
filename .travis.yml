@@ -16,10 +16,6 @@ jobs:
 
       warnings_are_errors: false
 
-      cache: 
-        directories:
-          - node_modules
-
       before_install: 
         - cd 'Back-End DM'
  
@@ -32,4 +28,4 @@ jobs:
           - heroku container:release web -a psique-dm
         on: 
           repo: Daniel0205/Psique-DM
-          branch: feature/deployAPI
+          branch: master
