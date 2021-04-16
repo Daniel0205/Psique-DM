@@ -6,6 +6,8 @@ git:
 language: node_js
 node_js:
   - 14
+services:
+  - docker
 jobs:
   include:
     # ======== Parte del frontend ========
@@ -19,11 +21,8 @@ jobs:
           - node_modules
 
       before_install: 
-        - cd 'Back-End DM'
-        - CI=false 
-
-      install:
-        - npm install
+        - heroku container:push web -a psique-dm
+        - heroku container:release web -a cubejs-heroku-demo
 
       deploy:
         provider: heroku
@@ -32,6 +31,3 @@ jobs:
         on: 
           repo: Daniel0205/Psique-DM
           branch: feature/deployAPI
-        run: 
-          - "npm install"
-          - "npm run dev"
