@@ -5,7 +5,7 @@ git:
 
 language: node_js
 node_js:
-  - 12
+  - 14
 
 jobs:
   include:
@@ -24,7 +24,6 @@ jobs:
         - CI=false 
 
       install:
-        - cd 'Back-End DM'
         - npm install
         - ls
         
