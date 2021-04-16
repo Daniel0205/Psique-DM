@@ -26,7 +26,7 @@ jobs:
         - CI=false 
 
       install:
-        - node install
+        - npm install
 
       script:
         - npm run build
