@@ -30,16 +30,17 @@ jobs:
 
       script:
         - npm run build
-      deploy:
-        provider: heroku
-        api_key: $HEROKU_API_KEY
+        
+       deploy:
+        provider: script
         app: psique-dashboard
+        script:
+          - heroku container:login
+          - heroku container:push web -a psique-dashboard
+          - heroku container:release web -a psique-dashboard
         on: 
           repo: Daniel0205/Psique-DM
           branch: feature/deployAPI
-        script:
-          - npm install -g serve
-          - serve -s build
     # ======== Parte del Backend ========
     - language: node_js
       node_js:  '14'
