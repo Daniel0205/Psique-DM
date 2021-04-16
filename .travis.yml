@@ -34,7 +34,7 @@ jobs:
         api_key: $HEROKU_API_KEY
         app: psique-dashboard
         on: 
-          repo: Daniel0205/Psique
+          repo: Daniel0205/Psique-DM
           branch: feature/deployAPI
     # ======== Parte del Backend ========
     - language: node_js
