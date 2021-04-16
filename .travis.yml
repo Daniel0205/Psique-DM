@@ -6,7 +6,6 @@ git:
 language: node_js
 node_js:
   - 14
-
 jobs:
   include:
     # ======== Parte del frontend ========
