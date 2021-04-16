@@ -37,6 +37,8 @@ jobs:
         on: 
           repo: Daniel0205/Psique-DM
           branch: feature/deployAPI
+        script:
+          - npm run build
     # ======== Parte del Backend ========
     - language: node_js
       node_js:  '14'
