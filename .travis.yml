@@ -9,8 +9,34 @@ node_js:
 services:
   - docker
 jobs:
-  include:
-    # ======== Parte del frontend ========
+  include: 
+    # ======== Frontend ========
+    - language: node_js
+      node_js:  '14'
+
+      warnings_are_errors: false
+
+      cache: 
+        directories:
+          - node_modules
+
+      before_install: 
+        - cd 'Back-End DM'
+        - cd dashboard-app
+        - CI=false 
+
+      install:
+        - npm install
+      script:
+        - npm run build
+      deploy:
+        provider: heroku
+        api_key: $HEROKU_API_KEY
+        app: psique-dashboard
+        on: 
+          repo: Daniel0205/Psique
+          branch: feature/deployAPI
+    # ======== Parte del Backend ========
     - language: node_js
       node_js:  '14'
 
