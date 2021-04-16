@@ -6,7 +6,8 @@ git:
 language: node_js
 node_js:
   - 14
-
+services:
+  - docker
 jobs:
   include:
     # ======== Parte del frontend ========
@@ -15,22 +16,16 @@ jobs:
 
       warnings_are_errors: false
 
-      cache: 
-        directories:
-          - node_modules
-
       before_install: 
         - cd 'Back-End DM'
-        - CI=false 
-
-      install:
-        - npm install
-        - ls
-        
+ 
       deploy:
-        provider: heroku
-        api_key: $HEROKU_TOKEN
+        provider: script
         app: psique-dm
+        script:
+          - heroku container:login
+          - heroku container:push web -a psique-dm
+          - heroku container:release web -a psique-dm
         on: 
           repo: Daniel0205/Psique-DM
-          branch: feature/deployAPI
+          branch: master
