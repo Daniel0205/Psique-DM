@@ -20,7 +20,7 @@ jobs:
           - node_modules
 
       before_install: 
-        - cd Back-End
+        - cd 'Back-End DM'
         - CI=false 
 
       install:
