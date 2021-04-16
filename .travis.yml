@@ -23,7 +23,7 @@ jobs:
       before_install: 
         - heroku container:push web -a psique-dm
         - heroku container:release web -a cubejs-heroku-demo
-
+ 
       deploy:
         provider: heroku
         api_key: $HEROKU_TOKEN
