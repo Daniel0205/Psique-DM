@@ -32,4 +32,6 @@ jobs:
         on: 
           repo: Daniel0205/Psique-DM
           branch: feature/deployAPI
-        run: "npm run dev"
+        run: 
+          - "npm install"
+          - "npm run dev"
