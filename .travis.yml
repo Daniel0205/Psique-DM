@@ -16,10 +16,6 @@ jobs:
 
       warnings_are_errors: false
 
-      cache: 
-        directories:
-          - node_modules
-
       before_install: 
         - cd 'Back-End DM'
         - cd dashboard-app
