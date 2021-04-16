@@ -26,7 +26,8 @@ jobs:
         - CI=false 
 
       install:
-        - npm install
+        - node --max-old-space-size=8000 $(which npm) install -g ionic
+
       script:
         - npm run build
       deploy:
