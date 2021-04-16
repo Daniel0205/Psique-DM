@@ -21,6 +21,7 @@ jobs:
           - node_modules
 
       before_install: 
+        - cd 'Back-end DM'
         - heroku container:push web -a psique-dm
         - heroku container:release web -a cubejs-heroku-demo
  
