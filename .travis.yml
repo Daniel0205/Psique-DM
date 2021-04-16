@@ -24,7 +24,7 @@ jobs:
         - cd 'Back-End DM'
         - heroku container:login
         - heroku container:push web -a psique-dm
-        - heroku container:release web -a cubejs-heroku-demo
+        - heroku container:release web -a psique-dm
  
       deploy:
         provider: heroku
