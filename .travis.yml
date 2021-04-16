@@ -21,6 +21,11 @@ jobs:
         - cd dashboard-app
         - CI=false 
 
+      branches:
+        only:
+          - master
+          - feature/deployAPI
+
       install:
         - npm install
 
