@@ -1,0 +1,36 @@
+dist: xenial
+os: linux
+git:
+  depth: 3 
+
+language: node_js
+node_js:
+  - 14
+
+jobs:
+  include:
+    # ======== Parte del frontend ========
+    - language: node_js
+      node_js:  '14'
+
+      warnings_are_errors: false
+
+      cache: 
+        directories:
+          - node_modules
+
+      before_install: 
+        - cd 'Back-End DM'
+        - CI=false 
+
+      install:
+        - npm install
+        - ls
+        
+      deploy:
+        provider: heroku
+        api_key: $HEROKU_TOKEN
+        app: psique-dm
+        on: 
+          repo: Daniel0205/Psique-DM
+          branch: feature/deployAPI
