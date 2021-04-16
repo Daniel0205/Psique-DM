@@ -22,14 +22,12 @@ jobs:
 
       before_install: 
         - cd 'Back-End DM'
-        - heroku container:login
  
       deploy:
-        provider: heroku
-        api_key: $HEROKU_TOKEN
+        provider: script
         app: psique-dm
         script:
-          
+          - heroku container:login
           - heroku container:push web -a psique-dm
           - heroku container:release web -a psique-dm
         on: 
