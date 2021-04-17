@@ -1,7 +1,5 @@
-FROM node:lts-alpine3.13
+FROM cubejs/cube:latest
 
 COPY . .
 
-RUN ["npm", "install", "-g", "serve"]
-
-ENTRYPOINT ["serve", "-s", "build"]
+RUN ["npm", "install"]
