@@ -19,6 +19,7 @@
     "graphql": "^15.5.0",
     "graphql-tag": "^2.11.0",
     "graphql-tools": "^5.0.0",
+    "jsonwebtoken": "^8.5.1",
     "numeral": "^2.0.6",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
@@ -35,8 +36,8 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts --max_old_space_size=8000 start",
+    "build": "react-scripts --max_old_space_size=8000 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
