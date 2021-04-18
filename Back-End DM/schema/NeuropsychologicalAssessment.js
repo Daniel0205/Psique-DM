@@ -1,95 +1,40 @@
 
 cube(`NeuropsychologicalAssessment`, {
-  sql: `SELECT * FROM public.neuropsychological_assessment`,
-  
-  joins: {
-    Background: {
-      relationship: `belongsTo`,
-      sql: `${Background}.id_background = ${Background}.id_background AND ${Background}.update_date = ${Background}.update_date`
-    },
-    Demographic: {
-      relationship: `belongsTo`,
-      sql: `${Demographic}.id_demographic = ${Demographic}.id_demographic AND ${Demographic}.update_date = ${Demographic}.update_date`
-    },
-    Medication: {
-      relationship: `belongsTo`,
-      sql: `${Medication}.id_medication = ${Medication}.id_medication`
-    },  
-    Date: {
-      relationship: `belongsTo`,
-      sql: `${Date}.id_date = ${Date}.id_date `
-    },  
-    CognitiveDisease: {
-      relationship: `belongsTo`,
-      sql: `${CognitiveDisease}.id_cognitive_disease = ${CognitiveDisease}.id_cognitive_disease `
-    }
-  },
-  
+  sql: `SELECT * FROM neuropsychological_assessment NATURAL JOIN medication NATURAL JOIN demographic NATURAL JOIN date NATURAL JOIN cognitive_disease NATURAL JOIN background`,
+    
   measures: {
     count: {
-      type: `count`,
-      drillMembers: []
+      sql: `count(*)`,
+      title: `Numero de evaluaciones realizadas`,
+      type: `number`,
+      meta: {
+        bool: 'true'
+      }
     },
-    average_iq: {
+    countIQ: {
       sql: `iq`,
-      type: `avg`,
-      title: `Promedio de resultados de iq`,
-      description: `Realiza un promedio de todos los resultados de IQ`,
+      type: `count`,
+      title: `Numero de iq registrados`,
+      filters: [
+        { sql: `NOT (${CUBE}.iq IS NULL)` }
+      ]
     },
-    average_verbal_comprehension: {
-      sql: `verbal_comprehension`,
-      type: `avg`,
-      title: `Promedio de resultados del indice de comprension verbal`,
-      description: `Realiza un promedio de todos los resultados del indice de comprension verbal`
+    medianIQ: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY iq)`,
+      type: `number`,
+      title: `Mediana de resultados IQ`,
     },
-    average_fluid_reasoning: {
-      sql: `fluid_reasoning`,
-      type: `avg`,
-      title: `Promedio de resultados del indice de fluid_reasoning`,
-      description: `Realiza un promedio de todos los resultados del indice de fluid_reasoning`
-    },
-    average_working_memory: {
-      sql: `working_memory`,
-      type: `avg`,
-      title: `Promedio de resultados del indice de Memoria de trabajo`,
-      description: `Realiza un promedio de todos los resultados del indice de Memoria de trabajo`
-    },
-    average_processing_speed: {
-      sql: `processing_speed`,
-      type: `avg`,
-      title: `Promedio de resultados del indice de velocidad de procesamiento`,
-      description: `Realiza un promedio de todos los resultados del indice de velocidad de procesamiento`
-    },
-    average_rey_result: {
-      sql: `rey_result`,
-      type: `avg`,
-      title: `Promedio de resultados del indice de velocidad de procesamiento`,
-      description: `Realiza un promedio de todos los resultados del indice de velocidad de procesamiento`
-    },
-    average_rey_percentil: {
-      sql: `rey_percentil`,
-      type: `avg`,
-      title: `Promedio de los perceptiles`,
-      description: `Realiza un promedio de todos perceptiles de la prueba de rey`
-    },
-    average_stroop_word_colour: {
-      sql: `stroop_word_colour`,
-      type: `avg`,
-      title: `Promedio de los resultados de la prueba de stroop palabras y colores`,
-      description: `Realiza un promedio de todos los resultados de la prueba de stroop palabras y colores`
-    },
-    average_stroop_colour: {
-      sql: `stroop_colour`,
-      type: `avg`,
-      title: `Promedio de los resultados de la prueba de stroop colores`,
-      description: `Realiza un promedio de todos los resultados de la prueba de stroop colores`
-    },
-    average_stroop_word: {
-      sql: `stroop_word`,
-      type: `avg`,
-      title: `Promedio de los resultados de la prueba de stroop palabras`,
-      description: `Realiza un promedio de todos los resultados de la prueba de stroop palabras`
-    },
+    medianStroopWord: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY stroop_word)`,
+      type: `number`,
+      title: `Mediana de Stroop - Palabras `,
+    },    
+    
+    medianStroopColour: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY stroop_colour)`,
+      type: `number`,
+      title: `Mediana de Stroop - Colores `,
+    },    
   },
   
   dimensions: {
@@ -97,8 +42,167 @@ cube(`NeuropsychologicalAssessment`, {
       sql: `id_assessment`,
       type: `number`,
       primaryKey: true
+    },
+    //medication
+    medicine: {
+      sql: `medicine`,
+      type: `string`,
+    },
+    //cognitive disease
+    type: {
+      sql: `type`,
+      type: `string`
+    },
+    //background
+    rhinitis: {
+      sql: `rhinitis`,
+      type: `string`
+    },
+    
+    earache: {
+      sql: `earache`,
+      type: `string`
+    },
+    
+    headTrauma: {
+      sql: `head_trauma`,
+      type: `string`
+    },
+    
+    prenatalTrauma: {
+      sql: `prenatal_trauma`,
+      type: `string`
+    },
+    
+    meningitis: {
+      sql: `meningitis`,
+      type: `string`
+    },
+    
+    prematureBirth: {
+      sql: `premature_birth`,
+      type: `string`
+    },
+    
+    narcotics: {
+      sql: `narcotics`,
+      type: `string`
+    },
+    
+    asthma: {
+      sql: `asthma`,
+      type: `string`
+    },
+    
+    sinusitis: {
+      sql: `sinusitis`,
+      type: `string`
+    },
+    
+    pneumothorax: {
+      sql: `pneumothorax`,
+      type: `string`
+    },
+    
+    tuberculosis: {
+      sql: `tuberculosis`,
+      type: `string`
+    },
+    
+    heartProblems: {
+      sql: `heart_problems`,
+      type: `string`
+    },
+    
+    renalProblems: {
+      sql: `renal_problems`,
+      type: `string`
+    },
+    boneProblems: {
+      sql: `bone_problems`,
+      type: `string`
+    },
+    
+    epidermalProblems: {
+      sql: `epidermal_problems`,
+      type: `string`
+    },
+    
+    highBloodPressure: {
+      sql: `high_blood_pressure`,
+      type: `string`
+    },
+    
+    smoking: {
+      sql: `smoking`,
+      type: `string`
+    },
+    
+    alcoholism: {
+      sql: `alcoholism`,
+      type: `string`
+    },
+
+//demographic
+    gender: {
+      sql: `gender`,
+      type: `string`
+    },
+    
+    bornCity: {
+      sql: `born_city`,
+      type: `string`
+    },
+    
+    actualCity: {
+      sql: `actual_city`,
+      type: `string`
+    },
+    
+    civilState: {
+      sql: `civil_state`,
+      type: `string`
+    },
+    
+    handedness: {
+      sql: `handedness`,
+      type: `string`
+    },
+    
+    scholarship: {
+      sql: `scholarship`,
+      type: `string`
+    },
+
+    //date
+    time: {
+      sql: `make_date(${CUBE}.year,${CUBE}.month,${CUBE}.day)`,
+      type: `time`,
     }
-   
+  },
+
+  segments: {
+    Iq_Deficiente: {
+      sql: `${CUBE}.iq <= 69`
+    },
+    Iq_Inferior: {
+      sql: `${CUBE}.iq >= 70 AND ${CUBE}.iq <= 79`
+    },
+    Iq_Abajo_del_Promedio: {
+      sql: `${CUBE}.iq >= 80 AND ${CUBE}.iq <= 89`
+    },
+    Iq_Promedio: {
+      sql: `${CUBE}.iq >= 90 AND ${CUBE}.iq <= 109`
+    },
+    Iq_Arriba_del_Promedio: {
+      sql: `${CUBE}.iq >= 100 AND ${CUBE}.iq <= 119`
+    },
+    Iq_Superior: {
+      sql: `${CUBE}.iq >= 120 AND ${CUBE}.iq <= 129`
+    },
+    Iq_Muy_Superior: {
+      sql: `${CUBE}.iq >= 130`
+    }
   },
   
   dataSource: `default`

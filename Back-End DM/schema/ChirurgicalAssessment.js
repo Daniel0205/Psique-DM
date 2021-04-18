@@ -2,7 +2,7 @@ cube(`ChirurgicalAssessment`, {
   sql: `SELECT * FROM public.chirurgical_assessment`,
   
   joins: {
-
+/*
     Background: {
       relationship: `belongsTo`,
       sql: `${Background}.id_background = ${Background}.id_background AND ${Background}.update_date = ${Background}.update_date`
@@ -22,13 +22,13 @@ cube(`ChirurgicalAssessment`, {
     CognitiveDisease: {
       relationship: `belongsTo`,
       sql: `${CognitiveDisease}.id_cognitive_disease = ${CognitiveDisease}.id_cognitive_disease `
-    },
+    },*/
     
     
   },
   
   measures: {
-    count: {
+  /*  count: {
       type: `count`,
       drillMembers: []
     },
@@ -73,7 +73,7 @@ cube(`ChirurgicalAssessment`, {
       type: `avg`,
       title: `Promedio de resultados de la subprueba seguimiento de instrucciones`,
       description: `Realiza un promedio de todos los resultados de la subprueba seguimiento de instrucciones`
-    },
+    },*/
   },
   
   dimensions: {
