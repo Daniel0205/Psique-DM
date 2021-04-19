@@ -24,8 +24,10 @@ const Header = ({ location }) => (
           display: 'inline',
           width: '25%',
           lineHeight: '54px',
+          cursor: 'pointer'
         }}
-        src={Logo}/>
+        src={Logo}
+        onClick={()=>window.location.replace(process.env.REACT_APP_MAIN_PAGE)}/>
       <h2
         style={{
           color: '#fff',

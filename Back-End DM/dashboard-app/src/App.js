@@ -11,11 +11,9 @@ import Header from './components/Header';
 import jwt from 'jsonwebtoken';
 
 
-console.log(process.env)
 const API_URL = process.env.REACT_APP_API_URL;
 const CUBEJS_TOKEN = jwt.sign({user:'default'}, process.env.REACT_APP_CUBEJS_API_SECRET);
 
-console.log(CUBEJS_TOKEN)
 const cubejsApi = cubejs(CUBEJS_TOKEN, {
   apiUrl: API_URL ,
 });
