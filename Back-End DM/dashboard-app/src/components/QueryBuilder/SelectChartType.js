@@ -6,7 +6,7 @@ import ButtonDropdown from './ButtonDropdown';
 const ChartTypes = [
   {
     name: 'line',
-    title: 'Line',
+    title: 'Linea',
     icon: 'line-chart',
   },
   {
@@ -16,22 +16,22 @@ const ChartTypes = [
   },
   {
     name: 'bar',
-    title: 'Bar',
+    title: 'Barras',
     icon: 'bar-chart',
   },
   {
     name: 'pie',
-    title: 'Pie',
+    title: 'Pastel',
     icon: 'pie-chart',
   },
   {
     name: 'table',
-    title: 'Table',
+    title: 'Tabla',
     icon: 'table',
   },
   {
     name: 'number',
-    title: 'Number',
+    title: 'Numero',
     icon: 'info-circle',
   },
 ];

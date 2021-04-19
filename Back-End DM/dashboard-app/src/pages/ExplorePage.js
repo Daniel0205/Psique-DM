@@ -56,7 +56,7 @@ const ExplorePage = withRouter(({ history, location }) => {
             loading={addingToDashboard}
             onClick={() => setTitleModalVisible(true)}
           >
-            {itemId ? 'Update' : 'Add to Dashboard'}
+            {itemId ? 'Update' : 'Agregar al Dashboard'}
           </Button>,
         ]}
         onVizStateChanged={setVizState}
