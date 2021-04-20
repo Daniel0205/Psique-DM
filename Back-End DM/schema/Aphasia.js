@@ -1,10 +1,6 @@
 cube(`Aphasia`, {
   sql: `SELECT * FROM public.aphasia`,
   
-  joins: {
-    
-  },
-  
   measures: {
   },
   
@@ -14,9 +10,13 @@ cube(`Aphasia`, {
       type: `number`,
       primaryKey: true
     },    
-    aphasia: {
+    Afasia: {
       sql: `aphasia`,
       type: `string`
+    },
+    tiempo_de_Afasia: {
+      sql: `time`,
+      type: `number`
     }
   },
   

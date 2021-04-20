@@ -1,11 +1,31 @@
 
 cube(`NeuropsychologicalAssessment`, {
-  sql: `SELECT * FROM neuropsychological_assessment NATURAL JOIN medication NATURAL JOIN demographic NATURAL JOIN date NATURAL JOIN cognitive_disease NATURAL JOIN background`,
+  sql: `SELECT * FROM neuropsychological_assessment`,
     
+  joins: {
+    Medication: {
+      relationship: `hasOne`,
+      sql: `${NeuropsychologicalAssessment}.id_medication = ${Medication}.id_medication`
+    },
+    Background: {
+      relationship: `hasOne`,
+      sql: `${NeuropsychologicalAssessment}.id_background = ${Background}.id_background  AND ${NeuropsychologicalAssessment}.id_background_date = ${Background}.update_date`
+    },
+    Date: {
+      relationship: `hasOne`,
+      sql: `${NeuropsychologicalAssessment}.id_date = ${Date}.id_date`
+    },
+    Demographic: {
+      relationship: `hasOne`,
+      sql: `${NeuropsychologicalAssessment}.id_demographic = ${Demographic}.id_demographic AND ${NeuropsychologicalAssessment}.id_demographic_date = ${Demographic}.update_date`
+    },
+    
+  },
+
   measures: {
     count: {
       sql: `count(*)`,
-      title: `Numero de evaluaciones realizadas`,
+      title: `Numero de evaluaciones de consultorio realizadas`,
       type: `number`,
       meta: {
         bool: 'true'
@@ -24,17 +44,53 @@ cube(`NeuropsychologicalAssessment`, {
       type: `number`,
       title: `Mediana de resultados IQ`,
     },
-    medianStroopWord: {
+    median_verbal_comprehension: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY verbal_comprehension)`,
+      type: `number`,
+      title: `Mediana del indice de comprension verbal`,
+    },
+    median_fluid_reasoning: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY fluid_reasoning)`,
+      type: `number`,
+      title: `Mediana del indice de razonamiento fluido`,
+    },
+    median_working_memory: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY working_memory)`,
+      type: `number`,
+      title: `Mediana del indice de memoria de trabajo`,
+    },
+    median_processing_speed: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY processing_speed)`,
+      type: `number`,
+      title: `Mediana del indice de velocidad de procesamiento`,
+    },
+    //stroop
+    median_StroopWord: {
       sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY stroop_word)`,
       type: `number`,
       title: `Mediana de Stroop - Palabras `,
     },    
-    
-    medianStroopColour: {
+    median_StroopColour: {
       sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY stroop_colour)`,
       type: `number`,
       title: `Mediana de Stroop - Colores `,
-    },    
+    },
+    median_stroop_word_colour: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY stroop_word_colour)`,
+      type: `number`,
+      title: `Mediana de Stroop con interferencia - (Palabras y Colores) `,
+    },
+    //Rey
+    median_rey_result: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY rey_result)`,
+      type: `number`,
+      title: `Mediana de resultados del test de rey`,
+    },
+    median_rey_percentil: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY rey_percentil)`,
+      type: `number`,
+      title: `Mediana de los perceptiles obtenidos del test de rey`,
+    },
   },
   
   dimensions: {
@@ -43,142 +99,6 @@ cube(`NeuropsychologicalAssessment`, {
       type: `number`,
       primaryKey: true
     },
-    //medication
-    medicine: {
-      sql: `medicine`,
-      type: `string`,
-    },
-    //cognitive disease
-    type: {
-      sql: `type`,
-      type: `string`
-    },
-    //background
-    rhinitis: {
-      sql: `rhinitis`,
-      type: `string`
-    },
-    
-    earache: {
-      sql: `earache`,
-      type: `string`
-    },
-    
-    headTrauma: {
-      sql: `head_trauma`,
-      type: `string`
-    },
-    
-    prenatalTrauma: {
-      sql: `prenatal_trauma`,
-      type: `string`
-    },
-    
-    meningitis: {
-      sql: `meningitis`,
-      type: `string`
-    },
-    
-    prematureBirth: {
-      sql: `premature_birth`,
-      type: `string`
-    },
-    
-    narcotics: {
-      sql: `narcotics`,
-      type: `string`
-    },
-    
-    asthma: {
-      sql: `asthma`,
-      type: `string`
-    },
-    
-    sinusitis: {
-      sql: `sinusitis`,
-      type: `string`
-    },
-    
-    pneumothorax: {
-      sql: `pneumothorax`,
-      type: `string`
-    },
-    
-    tuberculosis: {
-      sql: `tuberculosis`,
-      type: `string`
-    },
-    
-    heartProblems: {
-      sql: `heart_problems`,
-      type: `string`
-    },
-    
-    renalProblems: {
-      sql: `renal_problems`,
-      type: `string`
-    },
-    boneProblems: {
-      sql: `bone_problems`,
-      type: `string`
-    },
-    
-    epidermalProblems: {
-      sql: `epidermal_problems`,
-      type: `string`
-    },
-    
-    highBloodPressure: {
-      sql: `high_blood_pressure`,
-      type: `string`
-    },
-    
-    smoking: {
-      sql: `smoking`,
-      type: `string`
-    },
-    
-    alcoholism: {
-      sql: `alcoholism`,
-      type: `string`
-    },
-
-//demographic
-    gender: {
-      sql: `gender`,
-      type: `string`
-    },
-    
-    bornCity: {
-      sql: `born_city`,
-      type: `string`
-    },
-    
-    actualCity: {
-      sql: `actual_city`,
-      type: `string`
-    },
-    
-    civilState: {
-      sql: `civil_state`,
-      type: `string`
-    },
-    
-    handedness: {
-      sql: `handedness`,
-      type: `string`
-    },
-    
-    scholarship: {
-      sql: `scholarship`,
-      type: `string`
-    },
-
-    //date
-    time: {
-      sql: `make_date(${CUBE}.year,${CUBE}.month,${CUBE}.day)`,
-      type: `time`,
-    }
   },
 
   segments: {

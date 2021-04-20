@@ -2,78 +2,87 @@ cube(`ChirurgicalAssessment`, {
   sql: `SELECT * FROM public.chirurgical_assessment`,
   
   joins: {
-/*
+    Medication: {
+      relationship: `hasOne`,
+      sql: `${ChirurgicalAssessment}.id_medication = ${Medication}.id_medication`
+    },
     Background: {
-      relationship: `belongsTo`,
-      sql: `${Background}.id_background = ${Background}.id_background AND ${Background}.update_date = ${Background}.update_date`
+      relationship: `hasOne`,
+      sql: `${ChirurgicalAssessment}.id_background = ${Background}.id_background  AND ${ChirurgicalAssessment}.id_background_date = ${Background}.update_date`
+    },
+    Date: {
+      relationship: `hasOne`,
+      sql: `${ChirurgicalAssessment}.id_date = ${Date}.id_date`
     },
     Demographic: {
-      relationship: `belongsTo`,
-      sql: `${Demographic}.id_demographic = ${Demographic}.id_demographic AND ${Demographic}.update_date = ${Demographic}.update_date`
+      relationship: `hasOne`,
+      sql: `${ChirurgicalAssessment}.id_demographic = ${Demographic}.id_demographic AND ${ChirurgicalAssessment}.id_demographic_date = ${Demographic}.update_date`
     },
-    Medication: {
-      relationship: `belongsTo`,
-      sql: `${Medication}.id_medication = ${Medication}.id_medication`
-    },  
-    Date: {
-      relationship: `belongsTo`,
-      sql: `${Date}.id_date = ${Date}.id_date `
-    },  
-    CognitiveDisease: {
-      relationship: `belongsTo`,
-      sql: `${CognitiveDisease}.id_cognitive_disease = ${CognitiveDisease}.id_cognitive_disease `
-    },*/
-    
-    
+    Aphasia: {
+      relationship: `hasOne`,
+      sql: `${ChirurgicalAssessment}.id_aphasia = ${Aphasia}.id_aphasia`
+    },
+    Stage: {
+      relationship: `hasOne`,
+      sql: `${ChirurgicalAssessment}.id_stage = ${Stage}.id_stage`
+    },
+    MotorDeficit: {
+      relationship: `hasOne`,
+      sql: `${ChirurgicalAssessment}.id_deficit = ${MotorDeficit}.id_deficit`
+    },
   },
   
   measures: {
-  /*  count: {
-      type: `count`,
-      drillMembers: []
+    count: {
+      sql: `count(*)`,
+      title: `Numero de evaluaciones de quirofano realizadas`,
+      type: `number`,
+      meta: {
+        bool: 'true'
+      }
     },
     average_counting: {
-      sql: `counting`,
-      type: `avg`,
-      title: `Promedio de resultados de la subprueba de conteo`,
-      description: `Realiza un promedio de todos los resultados de la subprueba de conteo`
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY counting)`,
+      type: `number`,
+      title: `Mediana de resultados de la subprueba de conteo`,
+      description: `Realiza un Mediana de todos los resultados de la subprueba de conteo`
     },
     average_denomination: {
-      sql: `denomination`,
-      type: `avg`,
-      title: `Promedio de resultados de la subprueba de denominacion`,
-      description: `Realiza un promedio de todos los resultados de la subprueba de denominacion`
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY denomination)`,
+      type: `number`,
+      title: `Mediana de resultados de la subprueba de denominacion`,
+      description: `Realiza un Mediana de todos los resultados de la subprueba de denominacion`
     },
     average_verbal_instructions: {
-      sql: `verbal_instructions`,
-      type: `avg`,
-      title: `Promedio de resultados de la subprueba instrucciones verbales`,
-      description: `Realiza un promedio de todos los resultados de la subprueba instrucciones verbales`
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY verbal_instructions)`,
+      type: `number`,
+      title: `Mediana de resultados de la subprueba instrucciones verbales`,
+      description: `Realiza un Mediana de todos los resultados de la subprueba instrucciones verbales`
     },
     average_repetition: {
-      sql: `repetition`,
-      type: `avg`,
-      title: `Promedio de resultados de la subprueba repeticion`,
-      description: `Realiza un promedio de todos los resultados de la subprueba repeticion`
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY repetition)`,
+      type: `number`,
+      title: `Mediana de resultados de la subprueba repeticion`,
+      description: `Realiza un Mediana de todos los resultados de la subprueba repeticion`
     },
     average_processing_speed: {
-      sql: `processing_speed`,
-      type: `avg`,
-      title: `Promedio de resultados de la subprueba velocidad de procesamiento`,
-      description: `Realiza un promedio de todos los resultados de la subprueba velocidad de procesamiento`
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY processing_speed)`,
+      type: `number`,
+      title: `Mediana de resultados de la subprueba velocidad de procesamiento`,
+      description: `Realiza un Mediana de todos los resultados de la subprueba velocidad de procesamiento`
     },
     average_lecture: {
-      sql: `lecture`,
-      type: `avg`,
-      title: `Promedio de resultados de la subprueba lectura`,
-      description: `Realiza un promedio de todos los resultados de la subprueba lectura`
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY lecture)`,
+      type: `number`,
+      title: `Mediana de resultados de la subprueba lectura`,
+      description: `Realiza un Mediana de todos los resultados de la subprueba lectura`
     },
     average_follow_instructions: {
-      sql: `follow_instructions`,
-      type: `avg`,
-      title: `Promedio de resultados de la subprueba seguimiento de instrucciones`,
-      description: `Realiza un promedio de todos los resultados de la subprueba seguimiento de instrucciones`
-    },*/
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY follow_instructions)`,
+      type: `number`,
+      title: `Mediana de resultados de la subprueba seguimiento de instrucciones`,
+      description: `Realiza un Mediana de todos los resultados de la subprueba seguimiento de instrucciones`
+    },
   },
   
   dimensions: {

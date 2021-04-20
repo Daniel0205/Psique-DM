@@ -1,10 +1,6 @@
 cube(`Stage`, {
   sql: `SELECT * FROM public.stage`,
   
-  joins: {
-    
-  },
-  
   measures: {
 
   },
@@ -15,7 +11,7 @@ cube(`Stage`, {
       type: `number`,
       primaryKey: true
     },
-    stage: {
+    Etapa_de_Evaluacion: {
       sql: `stage`,
       type: `string`
     }

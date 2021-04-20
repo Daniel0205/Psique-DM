@@ -1,10 +1,6 @@
 cube(`MotorDeficit`, {
   sql: `SELECT * FROM public.motor_deficit`,
   
-  joins: {
-    
-  },
-  
   measures: {
   },
   
@@ -14,7 +10,7 @@ cube(`MotorDeficit`, {
       type: `number`,
       primaryKey: true
     },
-    deficit: {
+    Deficit_motor: {
       sql: `deficit`,
       type: `string`
     }
