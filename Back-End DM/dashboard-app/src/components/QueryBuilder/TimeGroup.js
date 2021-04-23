@@ -94,7 +94,7 @@ const TimeGroup = ({
             {m.dimension.title}
           </MemberDropdown>
         </RemoveButtonGroup>,
-        <b key={`${m.dimension.name}-for`}>FOR</b>,
+        <b key={`${m.dimension.name}-for`}>Para</b>,
         <ButtonDropdown
           overlay={dateRangeMenu((dateRange) =>
             updateMethods.update(m, { ...m, dateRange: dateRange.value })
@@ -107,7 +107,7 @@ const TimeGroup = ({
         >
           {m.dateRange || 'All time'}
         </ButtonDropdown>,
-        <b key={`${m.dimension.name}-by`}>BY</b>,
+        <b key={`${m.dimension.name}-by`}>Por</b>,
         <ButtonDropdown
           overlay={granularityMenu(m.dimension, (granularity) =>
             updateMethods.update(m, { ...m, granularity: granularity.name })

@@ -1,94 +1,95 @@
 
 cube(`NeuropsychologicalAssessment`, {
-  sql: `SELECT * FROM public.neuropsychological_assessment`,
-  
+  sql: `SELECT * FROM neuropsychological_assessment`,
+    
   joins: {
+    Medication: {
+      relationship: `hasOne`,
+      sql: `${NeuropsychologicalAssessment}.id_medication = ${Medication}.id_medication`
+    },
     Background: {
-      relationship: `belongsTo`,
-      sql: `${Background}.id_background = ${Background}.id_background AND ${Background}.update_date = ${Background}.update_date`
+      relationship: `hasOne`,
+      sql: `${NeuropsychologicalAssessment}.id_background = ${Background}.id_background  AND ${NeuropsychologicalAssessment}.id_background_date = ${Background}.update_date`
+    },
+    Date: {
+      relationship: `hasOne`,
+      sql: `${NeuropsychologicalAssessment}.id_date = ${Date}.id_date`
     },
     Demographic: {
-      relationship: `belongsTo`,
-      sql: `${Demographic}.id_demographic = ${Demographic}.id_demographic AND ${Demographic}.update_date = ${Demographic}.update_date`
+      relationship: `hasOne`,
+      sql: `${NeuropsychologicalAssessment}.id_demographic = ${Demographic}.id_demographic AND ${NeuropsychologicalAssessment}.id_demographic_date = ${Demographic}.update_date`
     },
-    Medication: {
-      relationship: `belongsTo`,
-      sql: `${Medication}.id_medication = ${Medication}.id_medication`
-    },  
-    Date: {
-      relationship: `belongsTo`,
-      sql: `${Date}.id_date = ${Date}.id_date `
-    },  
-    CognitiveDisease: {
-      relationship: `belongsTo`,
-      sql: `${CognitiveDisease}.id_cognitive_disease = ${CognitiveDisease}.id_cognitive_disease `
-    }
+    
   },
-  
+
   measures: {
     count: {
-      type: `count`,
-      drillMembers: []
+      sql: `count(*)`,
+      title: `Numero de evaluaciones de consultorio realizadas`,
+      type: `number`,
+      meta: {
+        bool: 'true'
+      }
     },
-    average_iq: {
+    countIQ: {
       sql: `iq`,
-      type: `avg`,
-      title: `Promedio de resultados de iq`,
-      description: `Realiza un promedio de todos los resultados de IQ`,
+      type: `count`,
+      title: `Numero de iq registrados`,
+      filters: [
+        { sql: `NOT (${CUBE}.iq IS NULL)` }
+      ]
     },
-    average_verbal_comprehension: {
-      sql: `verbal_comprehension`,
-      type: `avg`,
-      title: `Promedio de resultados del indice de comprension verbal`,
-      description: `Realiza un promedio de todos los resultados del indice de comprension verbal`
+    medianIQ: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY iq)`,
+      type: `number`,
+      title: `Mediana de resultados IQ`,
     },
-    average_fluid_reasoning: {
-      sql: `fluid_reasoning`,
-      type: `avg`,
-      title: `Promedio de resultados del indice de fluid_reasoning`,
-      description: `Realiza un promedio de todos los resultados del indice de fluid_reasoning`
+    median_verbal_comprehension: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY verbal_comprehension)`,
+      type: `number`,
+      title: `Mediana del indice de comprension verbal`,
     },
-    average_working_memory: {
-      sql: `working_memory`,
-      type: `avg`,
-      title: `Promedio de resultados del indice de Memoria de trabajo`,
-      description: `Realiza un promedio de todos los resultados del indice de Memoria de trabajo`
+    median_fluid_reasoning: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY fluid_reasoning)`,
+      type: `number`,
+      title: `Mediana del indice de razonamiento fluido`,
     },
-    average_processing_speed: {
-      sql: `processing_speed`,
-      type: `avg`,
-      title: `Promedio de resultados del indice de velocidad de procesamiento`,
-      description: `Realiza un promedio de todos los resultados del indice de velocidad de procesamiento`
+    median_working_memory: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY working_memory)`,
+      type: `number`,
+      title: `Mediana del indice de memoria de trabajo`,
     },
-    average_rey_result: {
-      sql: `rey_result`,
-      type: `avg`,
-      title: `Promedio de resultados del indice de velocidad de procesamiento`,
-      description: `Realiza un promedio de todos los resultados del indice de velocidad de procesamiento`
+    median_processing_speed: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY processing_speed)`,
+      type: `number`,
+      title: `Mediana del indice de velocidad de procesamiento`,
     },
-    average_rey_percentil: {
-      sql: `rey_percentil`,
-      type: `avg`,
-      title: `Promedio de los perceptiles`,
-      description: `Realiza un promedio de todos perceptiles de la prueba de rey`
+    //stroop
+    median_StroopWord: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY stroop_word)`,
+      type: `number`,
+      title: `Mediana de Stroop - Palabras `,
+    },    
+    median_StroopColour: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY stroop_colour)`,
+      type: `number`,
+      title: `Mediana de Stroop - Colores `,
     },
-    average_stroop_word_colour: {
-      sql: `stroop_word_colour`,
-      type: `avg`,
-      title: `Promedio de los resultados de la prueba de stroop palabras y colores`,
-      description: `Realiza un promedio de todos los resultados de la prueba de stroop palabras y colores`
+    median_stroop_word_colour: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY stroop_word_colour)`,
+      type: `number`,
+      title: `Mediana de Stroop con interferencia - (Palabras y Colores) `,
     },
-    average_stroop_colour: {
-      sql: `stroop_colour`,
-      type: `avg`,
-      title: `Promedio de los resultados de la prueba de stroop colores`,
-      description: `Realiza un promedio de todos los resultados de la prueba de stroop colores`
+    //Rey
+    median_rey_result: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY rey_result)`,
+      type: `number`,
+      title: `Mediana de resultados del test de rey`,
     },
-    average_stroop_word: {
-      sql: `stroop_word`,
-      type: `avg`,
-      title: `Promedio de los resultados de la prueba de stroop palabras`,
-      description: `Realiza un promedio de todos los resultados de la prueba de stroop palabras`
+    median_rey_percentil: {
+      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY rey_percentil)`,
+      type: `number`,
+      title: `Mediana de los perceptiles obtenidos del test de rey`,
     },
   },
   
@@ -97,8 +98,31 @@ cube(`NeuropsychologicalAssessment`, {
       sql: `id_assessment`,
       type: `number`,
       primaryKey: true
+    },
+  },
+
+  segments: {
+    Iq_Deficiente: {
+      sql: `${CUBE}.iq <= 69`
+    },
+    Iq_Inferior: {
+      sql: `${CUBE}.iq >= 70 AND ${CUBE}.iq <= 79`
+    },
+    Iq_Abajo_del_Promedio: {
+      sql: `${CUBE}.iq >= 80 AND ${CUBE}.iq <= 89`
+    },
+    Iq_Promedio: {
+      sql: `${CUBE}.iq >= 90 AND ${CUBE}.iq <= 109`
+    },
+    Iq_Arriba_del_Promedio: {
+      sql: `${CUBE}.iq >= 100 AND ${CUBE}.iq <= 119`
+    },
+    Iq_Superior: {
+      sql: `${CUBE}.iq >= 120 AND ${CUBE}.iq <= 129`
+    },
+    Iq_Muy_Superior: {
+      sql: `${CUBE}.iq >= 130`
     }
-   
   },
   
   dataSource: `default`

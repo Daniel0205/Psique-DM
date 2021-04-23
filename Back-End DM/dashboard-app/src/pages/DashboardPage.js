@@ -55,10 +55,10 @@ const DashboardPage = () => {
         padding: 12,
       }}
     >
-      <h2>There are no charts on this dashboard</h2>
+      <h2>No se han agregado graficos al Dashboard</h2>
       <Link to="/explore">
         <Button type="primary" size="large" icon={<Icon type="plus" />}>
-          Add chart
+          Agregar grafico
         </Button>
       </Link>
     </div>

@@ -13,102 +13,91 @@ cube(`Background`, {
     id_background: {
       sql: `id_background`,
       type: `number`,
-      primaryKey: true
+      primaryKey:true
     },
-    update_date: {
-      sql: `update_date`,
-      type: `number`,
-      primaryKey: true
-    },
-    rhinitis: {
-      sql: `rhinitis`,
+ //background
+    Sufre_de_rinitis: {
+      sql: `Case When rhinitis Then 'Si' ELSE 'No' END`,
       type: `string`
     },
     
-    earache: {
-      sql: `earache`,
+    Sufre_de_migrana: {
+      sql: `Case When earache Then 'Si' ELSE 'No' END`,
       type: `string`
     },
     
-    headTrauma: {
-      sql: `head_trauma`,
+    Sufrio_trauma_craneal: {
+      sql: `Case When head_trauma Then 'Si' ELSE 'No' END`,
       type: `string`
     },
     
-    prenatalTrauma: {
-      sql: `prenatal_trauma`,
+    Sufrio_trauma_prenatal: {
+      sql: `Case When prenatal_trauma Then 'Si' ELSE 'No' END`,
       type: `string`
     },
     
-    meningitis: {
-      sql: `meningitis`,
+    Tiene_meningitis: {
+      sql: `Case When meningitis Then 'Si' ELSE 'No' END`,
       type: `string`
     },
     
-    prematureBirth: {
-      sql: `premature_birth`,
+    Nacimiento_prematuro: {
+      sql: `Case When premature_birth Then 'Si' ELSE 'No' END`,
       type: `string`
     },
     
-    narcotics: {
-      sql: `narcotics`,
+    Uso_de_Narcoticos: {
+      sql: `Case When narcotics Then 'Si' ELSE 'No' END`,
       type: `string`
     },
     
-    asthma: {
-      sql: `asthma`,
+    Sufre_de_asma: {
+      sql: `Case When asthma Then 'Si' ELSE 'No' END`,
       type: `string`
     },
     
-    sinusitis: {
-      sql: `sinusitis`,
+    Sufrio_de_sinusitis: {
+      sql: `Case When sinusitis Then 'Si' ELSE 'No' END`,
       type: `string`
     },
     
-    pneumothorax: {
-      sql: `pneumothorax`,
+    Ha_sufrido_neumotorax: {
+      sql: `Case When pneumothorax Then 'Si' ELSE 'No' END`,
       type: `string`
     },
     
-    tuberculosis: {
-      sql: `tuberculosis`,
+    presento_tuberculosis: {
+      sql: `Case When tuberculosis Then 'Si' ELSE 'No' END`,
       type: `string`
     },
     
-    heartProblems: {
-      sql: `heart_problems`,
+    Problemas_cardicos: {
+      sql: `Case When heart_problems Then 'Si' ELSE 'No' END`,
       type: `string`
     },
     
-    renalProblems: {
-      sql: `renal_problems`,
+    Problemas_renales: {
+      sql: `Case When renal_problems Then 'Si' ELSE 'No' END`,
+      type: `string`
+    },
+    Problemas_en_Huesos: {
+      sql: `Case When bone_problems Then 'Si' ELSE 'No' END`,
       type: `string`
     },
     
-    boneProblems: {
-      sql: `bone_problems`,
+    Problemas_epidermicos: {
+      sql: `Case When epidermal_problems Then 'Si' ELSE 'No' END`,
+      type: `string`
+    },    
+    Fumador: {
+      sql: `Case When smoking Then 'Si' ELSE 'No' END`,
       type: `string`
     },
     
-    epidermalProblems: {
-      sql: `epidermal_problems`,
+    Alcoholismo: {
+      sql: `Case When alcoholism Then 'Si' ELSE 'No' END`,
       type: `string`
     },
-    
-    highBloodPressure: {
-      sql: `high_blood_pressure`,
-      type: `string`
-    },
-    
-    smoking: {
-      sql: `smoking`,
-      type: `string`
-    },
-    
-    alcoholism: {
-      sql: `alcoholism`,
-      type: `string`
-    }
   },
   
   dataSource: `default`

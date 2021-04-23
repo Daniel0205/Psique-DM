@@ -74,28 +74,28 @@ export default function ExploreQueryBuilder({
                       <MemberGroup
                         members={measures}
                         availableMembers={availableMeasures}
-                        addMemberName="Measure"
+                        addMemberName="Estadísticas de estudio"
                         updateMethods={updateMeasures}
                       />
                       <Divider type="vertical" />
                       <MemberGroup
                         members={dimensions}
                         availableMembers={availableDimensions}
-                        addMemberName="Dimension"
+                        addMemberName="Variables secundarias"
                         updateMethods={updateDimensions}
                       />
                       <Divider type="vertical" />
                       <MemberGroup
                         members={segments}
                         availableMembers={availableSegments}
-                        addMemberName="Segment"
+                        addMemberName="Filtros definidos"
                         updateMethods={updateSegments}
                       />
                       <Divider type="vertical" />
                       <TimeGroup
                         members={timeDimensions}
                         availableMembers={availableTimeDimensions}
-                        addMemberName="Time"
+                        addMemberName="Rango de Tiempo"
                         updateMethods={updateTimeDimensions}
                       />
                     </Col>
@@ -116,7 +116,7 @@ export default function ExploreQueryBuilder({
                         availableMembers={availableDimensions.concat(
                           availableMeasures
                         )}
-                        addMemberName="Filter"
+                        addMemberName="Filtros personalizados"
                         updateMethods={updateFilters}
                       />
                     </Col>
@@ -151,7 +151,7 @@ export default function ExploreQueryBuilder({
                           disabled={!isQueryPresent}
                           icon={<SortAscendingOutlined />}
                         >
-                          Order
+                          Orden
                         </Button>
                       </Popover>
 
@@ -172,7 +172,7 @@ export default function ExploreQueryBuilder({
                           disabled={!isQueryPresent}
                           icon={<BorderInnerOutlined />}
                         >
-                          Pivot
+                          Pivote
                         </Button>
                       </Popover>
                     </Col>
@@ -205,7 +205,7 @@ export default function ExploreQueryBuilder({
                       textAlign: 'center',
                     }}
                   >
-                    Choose a measure or dimension to get started
+                    Seleccionar una estadistica o varible para comenzar
                   </h2>
                 )}
               </Col>

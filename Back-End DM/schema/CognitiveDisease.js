@@ -6,20 +6,22 @@ cube(`CognitiveDisease`, {
   },
   
   measures: {
-
+    /*count: {
+      type: `count`,
+      drillMembers: []
+    }*/
   },
   
   dimensions: {
-    id_cognitive_disease: {
-      sql: `id_cognitive_disease`,
+    id_measure:{
+      sql: `id_measure`,
       type: `number`,
-      primaryKey: true
+      primaryKey:true
     },
-    type: {
+    Enfermedad_Cognitiva: {
       sql: `type`,
-      type: `string`,
-      primaryKey: true
-    },
+      type: `string`
+    }
   },
   
   dataSource: `default`

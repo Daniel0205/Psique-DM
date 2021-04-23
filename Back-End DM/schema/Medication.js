@@ -1,20 +1,17 @@
 cube(`Medication`, {
   sql: `SELECT * FROM public.medication`,
   
-  joins: {
-    
-  },
   
   measures: {
   },
   
   dimensions: {
     id_medication: {
-      sql: `id_medication`,
-      type: `number`,
+      sql: `medicine`,
+      type: `string`,
       primaryKey: true
     },
-    medicine: {
+    Medicina: {
       sql: `medicine`,
       type: `string`
     }

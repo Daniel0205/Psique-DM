@@ -12,7 +12,7 @@ const memberMenu = (onClick, availableMembers) => (
         </Menu.Item>
       ))
     ) : (
-      <Menu.Item disabled>No members found</Menu.Item>
+      <Menu.Item disabled>Opciones no disponibles</Menu.Item>
     )}
   </Menu>
 );
