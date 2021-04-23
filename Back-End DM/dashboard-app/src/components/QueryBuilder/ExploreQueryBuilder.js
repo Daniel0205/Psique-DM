@@ -74,14 +74,14 @@ export default function ExploreQueryBuilder({
                       <MemberGroup
                         members={measures}
                         availableMembers={availableMeasures}
-                        addMemberName="Medida"
+                        addMemberName="Estadísticas de estudio"
                         updateMethods={updateMeasures}
                       />
                       <Divider type="vertical" />
                       <MemberGroup
                         members={dimensions}
                         availableMembers={availableDimensions}
-                        addMemberName="Dimension"
+                        addMemberName="Variables secundarias"
                         updateMethods={updateDimensions}
                       />
                       <Divider type="vertical" />
@@ -95,7 +95,7 @@ export default function ExploreQueryBuilder({
                       <TimeGroup
                         members={timeDimensions}
                         availableMembers={availableTimeDimensions}
-                        addMemberName="Tiempo"
+                        addMemberName="Rango de Tiempo"
                         updateMethods={updateTimeDimensions}
                       />
                     </Col>
@@ -205,7 +205,7 @@ export default function ExploreQueryBuilder({
                       textAlign: 'center',
                     }}
                   >
-                    Seleccionar una medida o dimension para comenzar
+                    Seleccionar una estadistica o varible para comenzar
                   </h2>
                 )}
               </Col>
