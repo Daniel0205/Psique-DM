@@ -1,7 +1,3 @@
-FROM node:latest
+FROM cubejs/cube:latest
 
 COPY . .
-
-RUN ["npm", "run", "build"]
-
-RUN ["npm","install","-g","serve"]
