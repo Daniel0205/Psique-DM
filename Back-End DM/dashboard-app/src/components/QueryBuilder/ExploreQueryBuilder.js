@@ -47,7 +47,7 @@ export default function ExploreQueryBuilder({
         pivotConfig,
         updatePivotConfig,
       }) => {
-        console.log(availableMeasures)
+        console.log(filters)
         return (
           <Fragment>
             <Row
@@ -61,6 +61,7 @@ export default function ExploreQueryBuilder({
             >
               <Col span={24}>
                 <Card>
+                <b>Seleccion de variables:</b>
                   <Row
                     type="flex"
                     justify="space-around"
@@ -121,7 +122,7 @@ export default function ExploreQueryBuilder({
                       />
                     </Col>
                   </Row>
-
+                  <b>Opciones de Graficos:</b>
                   <Row
                     type="flex"
                     justify="space-around"

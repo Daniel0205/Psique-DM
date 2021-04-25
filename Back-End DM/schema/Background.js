@@ -1,4 +1,4 @@
-cube(`Background`, {
+cube(`Antecedentes`, {
   sql: `SELECT * FROM public.background`,
   
   joins: {

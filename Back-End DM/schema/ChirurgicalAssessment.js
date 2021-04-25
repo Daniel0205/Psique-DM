@@ -1,35 +1,35 @@
-cube(`ChirurgicalAssessment`, {
-  sql: `SELECT * FROM public.chirurgical_assessment`,
+cube(`EvaluacionesDeQuirofano`, {
+  sql: `SELECT * FROM chirurgical_assessment NATURAL JOIN date`,
   
   joins: {
-    Medication: {
+    Medicacion: {
       relationship: `hasOne`,
-      sql: `${ChirurgicalAssessment}.id_medication = ${Medication}.id_medication`
+      sql: `${EvaluacionesDeQuirofano}.id_medication = ${Medicacion}.id_medication`
     },
-    Background: {
+    Antecedentes: {
       relationship: `hasOne`,
-      sql: `${ChirurgicalAssessment}.id_background = ${Background}.id_background  AND ${ChirurgicalAssessment}.id_background_date = ${Background}.update_date`
+      sql: `${EvaluacionesDeQuirofano}.id_background = ${Antecedentes}.id_background  AND ${EvaluacionesDeQuirofano}.id_background_date = ${Antecedentes}.update_date`
     },
-    Date: {
+    DatosDemograficos: {
       relationship: `hasOne`,
-      sql: `${ChirurgicalAssessment}.id_date = ${Date}.id_date`
+      sql: `${EvaluacionesDeQuirofano}.id_demographic = ${DatosDemograficos}.id_demographic AND ${DatosDemograficos}.id_demographic_date = ${Demographic}.update_date`
     },
-    Demographic: {
+    Afasias: {
       relationship: `hasOne`,
-      sql: `${ChirurgicalAssessment}.id_demographic = ${Demographic}.id_demographic AND ${ChirurgicalAssessment}.id_demographic_date = ${Demographic}.update_date`
+      sql: `${EvaluacionesDeQuirofano}.id_aphasia = ${Afasias}.id_aphasia`
     },
-    Aphasia: {
+    EvaluacionesDeQuirofano: {
       relationship: `hasOne`,
-      sql: `${ChirurgicalAssessment}.id_aphasia = ${Aphasia}.id_aphasia`
+      sql: `${EvaluacionesDeQuirofano}.id_stage = ${EvaluacionesDeQuirofano}.id_stage`
     },
-    Stage: {
+    DeficitMotor: {
       relationship: `hasOne`,
-      sql: `${ChirurgicalAssessment}.id_stage = ${Stage}.id_stage`
+      sql: `${EvaluacionesDeQuirofano}.id_deficit = ${DeficitMotor}.id_deficit`
     },
-    MotorDeficit: {
+    EnfermedadCognitiva:{
       relationship: `hasOne`,
-      sql: `${ChirurgicalAssessment}.id_deficit = ${MotorDeficit}.id_deficit`
-    },
+      sql: `${EvaluacionesDeQuirofano}.id_disease = ${EnfermedadCognitiva}.id_disease`
+    }
   },
   
   measures: {
@@ -90,7 +90,23 @@ cube(`ChirurgicalAssessment`, {
       sql: `id_assessment`,
       type: `number`,
       primaryKey: true
-    }
+    },
+    FechaDeEvaluacion: {
+      sql: `make_date(${CUBE}.year,${CUBE}.month,${CUBE}.day) `,
+      type: `time`,
+    },
+    DiaDePresentacion: {
+      sql: `day`,
+      type: `number`,
+    },
+    MesDePresentacion: {
+      sql: `to_char(TO_DATE (month::text, 'MM'), 'Month') `,
+      type: `string`,
+    },
+    AnoDePresentacion: {
+      sql: `year`,
+      type: `number`,
+    },
     
   },
   

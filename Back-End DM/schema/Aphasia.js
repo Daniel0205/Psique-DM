@@ -1,4 +1,4 @@
-cube(`Aphasia`, {
+cube(`Afasias`, {
   sql: `SELECT * FROM public.aphasia`,
   
   measures: {
@@ -14,7 +14,7 @@ cube(`Aphasia`, {
       sql: `aphasia`,
       type: `string`
     },
-    tiempo_de_Afasia: {
+    SegundosPasadosAlPresentarse: {
       sql: `time`,
       type: `number`
     }

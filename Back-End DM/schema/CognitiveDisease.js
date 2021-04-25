@@ -1,4 +1,4 @@
-cube(`CognitiveDisease`, {
+cube(`EnfermedadCognitiva`, {
   sql: `SELECT * FROM public.cognitive_disease`,
   
   joins: {
@@ -13,12 +13,12 @@ cube(`CognitiveDisease`, {
   },
   
   dimensions: {
-    id_measure:{
-      sql: `id_measure`,
+    id_disease:{
+      sql: `id_disease`,
       type: `number`,
       primaryKey:true
     },
-    Enfermedad_Cognitiva: {
+    tipo: {
       sql: `type`,
       type: `string`
     }

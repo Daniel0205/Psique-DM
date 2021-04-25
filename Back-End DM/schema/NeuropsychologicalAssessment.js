@@ -1,24 +1,24 @@
 
-cube(`NeuropsychologicalAssessment`, {
-  sql: `SELECT * FROM neuropsychological_assessment`,
+cube(`EvaluacionesDeConsultorio`, {
+  sql: `SELECT * FROM neuropsychological_assessment NATURAL JOIN date`,
     
   joins: {
-    Medication: {
+    Medicacion: {
       relationship: `hasOne`,
-      sql: `${NeuropsychologicalAssessment}.id_medication = ${Medication}.id_medication`
+      sql: `${EvaluacionesDeConsultorio}.id_medication = ${Medicacion}.id_medication`
     },
-    Background: {
+    Antecedentes: {
       relationship: `hasOne`,
-      sql: `${NeuropsychologicalAssessment}.id_background = ${Background}.id_background  AND ${NeuropsychologicalAssessment}.id_background_date = ${Background}.update_date`
+      sql: `${EvaluacionesDeConsultorio}.id_background = ${Antecedentes}.id_background  AND ${EvaluacionesDeConsultorio}.id_background_date = ${Antecedentes}.update_date`
     },
-    Date: {
+    DatosDemograficos: {
       relationship: `hasOne`,
-      sql: `${NeuropsychologicalAssessment}.id_date = ${Date}.id_date`
+      sql: `${EvaluacionesDeConsultorio}.id_demographic = ${DatosDemograficos}.id_demographic AND ${EvaluacionesDeConsultorio}.id_demographic_date = ${DatosDemograficos}.update_date`
     },
-    Demographic: {
+    EnfermedadCognitiva:{
       relationship: `hasOne`,
-      sql: `${NeuropsychologicalAssessment}.id_demographic = ${Demographic}.id_demographic AND ${NeuropsychologicalAssessment}.id_demographic_date = ${Demographic}.update_date`
-    },
+      sql: `${EvaluacionesDeConsultorio}.id_disease = ${EnfermedadCognitiva}.id_disease`
+    }
     
   },
 
@@ -65,6 +65,14 @@ cube(`NeuropsychologicalAssessment`, {
       title: `Mediana del indice de velocidad de procesamiento`,
     },
     //stroop
+    countStroop: {
+      sql: `iq`,
+      type: `count`,
+      title: `Numero de iq registrados`,
+      filters: [
+        { sql: `NOT (${CUBE}.iq IS NULL)` }
+      ]
+    },
     median_StroopWord: {
       sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY stroop_word)`,
       type: `number`,
@@ -81,6 +89,14 @@ cube(`NeuropsychologicalAssessment`, {
       title: `Mediana de Stroop con interferencia - (Palabras y Colores) `,
     },
     //Rey
+    countRey: {
+      sql: `iq`,
+      type: `count`,
+      title: `Numero de iq registrados`,
+      filters: [
+        { sql: `NOT (${CUBE}.iq IS NULL)` }
+      ]
+    },
     median_rey_result: {
       sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY rey_result)`,
       type: `number`,
@@ -98,6 +114,22 @@ cube(`NeuropsychologicalAssessment`, {
       sql: `id_assessment`,
       type: `number`,
       primaryKey: true
+    },
+    FechaDeEvaluacion: {
+      sql: `make_date(${CUBE}.year,${CUBE}.month,${CUBE}.day) `,
+      type: `time`,
+    },
+    DiaDePresentacion: {
+      sql: `day`,
+      type: `number`,
+    },
+    MesDePresentacion: {
+      sql: `to_char(TO_DATE (month::text, 'MM'), 'Month') `,
+      type: `string`,
+    },
+    AnoDePresentacion: {
+      sql: `year`,
+      type: `number`,
     },
   },
 

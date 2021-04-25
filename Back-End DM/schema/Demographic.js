@@ -1,4 +1,4 @@
-cube(`Demographic`, {
+cube(`DatosDemograficos`, {
   sql: `SELECT * FROM public.demographic`,
   
   joins: {

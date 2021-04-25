@@ -1,4 +1,4 @@
-cube(`MotorDeficit`, {
+cube(`DeficitMotor`, {
   sql: `SELECT * FROM public.motor_deficit`,
   
   measures: {

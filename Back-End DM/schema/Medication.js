@@ -1,4 +1,4 @@
-cube(`Medication`, {
+cube(`Medicacion`, {
   sql: `SELECT * FROM public.medication`,
   
   

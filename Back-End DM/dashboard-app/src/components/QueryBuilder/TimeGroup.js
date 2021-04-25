@@ -7,46 +7,67 @@ import MemberDropdown from './MemberDropdown';
 import RemoveButtonGroup from './RemoveButtonGroup';
 const DateRanges = [
   {
-    title: 'All time',
+    title: 'Todo el tiempo',
     value: undefined,
   },
   {
+    title: 'Hoy',
     value: 'Today',
   },
   {
+    title: 'Ayer',
     value: 'Yesterday',
   },
   {
+    title: 'Esta Semana',
     value: 'This week',
   },
   {
+    title: 'Este Mes',
     value: 'This month',
   },
   {
+    title: 'Este trimestre',
     value: 'This quarter',
   },
   {
+    title: 'Este Año',
     value: 'This year',
   },
   {
+    title: 'Ultimos 7 dias',
     value: 'Last 7 days',
   },
   {
+    title: 'Ultimos 30 dias',
     value: 'Last 30 days',
   },
   {
+    title: 'Ultima semana',
     value: 'Last week',
   },
   {
+    title: 'Ultimo mes',
     value: 'Last month',
   },
-  {
+/*  {
     value: 'Last quarter',
-  },
+  },*/
   {
     value: 'Last year',
   },
 ];
+
+const granularities = [
+  {name: undefined, title: "Sin agrupacion"},
+  /*{name: "second", title: "Second"},
+  {name: "minute", title: "Minute"},
+  {name: "hour", title: "Hour"},*/
+  {name: "day", title: "Dia"},
+  {name: "week", title: "Semana"},
+  {name: "month", title: "Mes"},
+  {name: "year", title: "Año"}
+]
 
 const TimeGroup = ({
   members,
@@ -54,7 +75,9 @@ const TimeGroup = ({
   addMemberName,
   updateMethods,
 }) => {
-  const granularityMenu = (member, onClick) => (
+  const granularityMenu = (member, onClick) => {
+    member.granularities = granularities
+    return (
     <Menu>
       {member.granularities.length ? (
         member.granularities.map((m) => (
@@ -63,10 +86,10 @@ const TimeGroup = ({
           </Menu.Item>
         ))
       ) : (
-        <Menu.Item disabled>No members found</Menu.Item>
+        <Menu.Item disabled>La busqueda no arrojo resultados</Menu.Item>
       )}
     </Menu>
-  );
+  )};
 
   const dateRangeMenu = (onClick) => (
     <Menu>
@@ -77,6 +100,8 @@ const TimeGroup = ({
       ))}
     </Menu>
   );
+
+  console.log(members)
 
   return (
     <span>
@@ -105,9 +130,9 @@ const TimeGroup = ({
           }}
           key={`${m.dimension.name}-date-range`}
         >
-          {m.dateRange || 'All time'}
+          {m.dateRange || 'Todo el tiempo'}
         </ButtonDropdown>,
-        <b key={`${m.dimension.name}-by`}>Por</b>,
+        <b key={`${m.dimension.name}-by`}>Agrupados por</b>,
         <ButtonDropdown
           overlay={granularityMenu(m.dimension, (granularity) =>
             updateMethods.update(m, { ...m, granularity: granularity.name })

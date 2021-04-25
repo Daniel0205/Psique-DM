@@ -5,6 +5,15 @@ import { Icon } from '@ant-design/compatible';
 import MemberDropdown from './MemberDropdown';
 import RemoveButtonGroup from './RemoveButtonGroup';
 import FilterInput from './FilterInput';
+const filters = [
+  {name: "contains", title: "Contiene"},
+  {name: "notContains", title: "No Contiene"},
+  {name: "equals", title: "Es igual a"},
+  {name: "notEquals", title: "No es igual a"},
+ /* {name: "set", title: "is set"},
+  {name: "notSet", title: "is not set"}*/
+]
+
 
 const FilterGroup = ({
   members,
@@ -43,7 +52,7 @@ const FilterGroup = ({
             marginRight: 8,
           }}
         >
-          {m.operators.map((operator) => (
+          {filters.map((operator) => (
             <Select.Option key={operator.name} value={operator.name}>
               {operator.title}
             </Select.Option>
