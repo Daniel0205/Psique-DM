@@ -1,7 +1,7 @@
 
 cube(`EvaluacionesDeConsultorio`, {
-  sql: `SELECT * FROM neuropsychological_assessment NATURAL JOIN date`,
-    
+  sql: `SELECT * FROM Consultation_assessment NATURAL JOIN date`,
+
   joins: {
     Medicacion: {
       relationship: `hasOne`,
@@ -15,11 +15,11 @@ cube(`EvaluacionesDeConsultorio`, {
       relationship: `hasOne`,
       sql: `${EvaluacionesDeConsultorio}.id_demographic = ${DatosDemograficos}.id_demographic AND ${EvaluacionesDeConsultorio}.id_demographic_date = ${DatosDemograficos}.update_date`
     },
-    EnfermedadCognitiva:{
+    EnfermedadBase: {
       relationship: `hasOne`,
-      sql: `${EvaluacionesDeConsultorio}.id_disease = ${EnfermedadCognitiva}.id_disease`
+      sql: `${EvaluacionesDeConsultorio}.id_disease = ${EnfermedadBase}.id_disease`
     }
-    
+
   },
 
   measures: {
@@ -39,30 +39,30 @@ cube(`EvaluacionesDeConsultorio`, {
         { sql: `NOT (${CUBE}.iq IS NULL)` }
       ]
     },
-    medianIQ: {
-      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY iq)`,
-      type: `number`,
-      title: `Mediana de resultados IQ`,
+    mediaIQ: {
+      sql: `iq`,
+      type: `avg`,
+      title: `mediaa de resultados IQ`,
     },
-    median_verbal_comprehension: {
-      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY verbal_comprehension)`,
-      type: `number`,
-      title: `Mediana del indice de comprension verbal`,
+    media_verbal_comprehension: {
+      sql: `verbal_comprehension`,
+      type: `avg`,
+      title: `mediaa del indice de comprension verbal`,
     },
-    median_fluid_reasoning: {
-      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY fluid_reasoning)`,
-      type: `number`,
-      title: `Mediana del indice de razonamiento fluido`,
+    media_fluid_reasoning: {
+      sql: `fluid_reasoning`,
+      type: `avg`,
+      title: `mediaa del indice de razonamiento fluido`,
     },
-    median_working_memory: {
-      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY working_memory)`,
-      type: `number`,
-      title: `Mediana del indice de memoria de trabajo`,
+    media_working_memory: {
+      sql: `working_memory`,
+      type: `avg`,
+      title: `mediaa del indice de memoria de trabajo`,
     },
-    median_processing_speed: {
-      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY processing_speed)`,
-      type: `number`,
-      title: `Mediana del indice de velocidad de procesamiento`,
+    media_processing_speed: {
+      sql: `processing_speed`,
+      type: `avg`,
+      title: `mediaa del indice de velocidad de procesamiento`,
     },
     //stroop
     countStroop: {
@@ -73,20 +73,20 @@ cube(`EvaluacionesDeConsultorio`, {
         { sql: `NOT (${CUBE}.iq IS NULL)` }
       ]
     },
-    median_StroopWord: {
-      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY stroop_word)`,
-      type: `number`,
-      title: `Mediana de Stroop - Palabras `,
-    },    
-    median_StroopColour: {
-      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY stroop_colour)`,
-      type: `number`,
-      title: `Mediana de Stroop - Colores `,
+    media_StroopWord: {
+      sql: `stroop_word`,
+      type: `avg`,
+      title: `mediaa de Stroop - Palabras `,
     },
-    median_stroop_word_colour: {
-      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY stroop_word_colour)`,
-      type: `number`,
-      title: `Mediana de Stroop con interferencia - (Palabras y Colores) `,
+    media_StroopColour: {
+      sql: `stroop_colour`,
+      type: `avg`,
+      title: `mediaa de Stroop - Colores `,
+    },
+    media_stroop_word_colour: {
+      sql: `stroop_word_colour`,
+      type: `avg`,
+      title: `mediaa de Stroop con interferencia - (Palabras y Colores) `,
     },
     //Rey
     countRey: {
@@ -97,18 +97,18 @@ cube(`EvaluacionesDeConsultorio`, {
         { sql: `NOT (${CUBE}.iq IS NULL)` }
       ]
     },
-    median_rey_result: {
-      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY rey_result)`,
-      type: `number`,
-      title: `Mediana de resultados del test de rey`,
+    media_rey_result: {
+      sql: `rey_result`,
+      type: `avg`,
+      title: `mediaa de resultados del test de rey`,
     },
-    median_rey_percentil: {
-      sql: `PERCENTILE_CONT(0.5) WITHIN GROUP(ORDER BY rey_percentil)`,
-      type: `number`,
+    media_rey_percentil: {
+      sql: `rey_percentil`,
+      type: `avg`,
       title: `Mediana de los perceptiles obtenidos del test de rey`,
     },
   },
-  
+
   dimensions: {
     id: {
       sql: `id_assessment`,
@@ -156,6 +156,6 @@ cube(`EvaluacionesDeConsultorio`, {
       sql: `${CUBE}.iq >= 130`
     }
   },
-  
+
   dataSource: `default`
 });
