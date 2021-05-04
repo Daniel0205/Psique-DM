@@ -10,8 +10,10 @@ const filters = [
   {name: "notContains", title: "No Contiene"},
   {name: "equals", title: "Es igual a"},
   {name: "notEquals", title: "No es igual a"},
- /* {name: "set", title: "is set"},
-  {name: "notSet", title: "is not set"}*/
+  {name: "gt", title: "Mayor o igual a (>=)"},
+  {name: "gte", title: "Mayor a (>)"},
+  {name: "lt", title: "Mayor o igual a (<=)"},
+  {name: "lte", title: "Mayor a (<)"}
 ]
 
 
