@@ -42,27 +42,27 @@ cube(`EvaluacionesDeConsultorio`, {
     mediaIQ: {
       sql: `iq`,
       type: `avg`,
-      title: `mediaa de resultados IQ`,
+      title: `media de resultados IQ`,
     },
     media_verbal_comprehension: {
       sql: `verbal_comprehension`,
       type: `avg`,
-      title: `mediaa del indice de comprension verbal`,
+      title: `media del indice de comprension verbal`,
     },
     media_fluid_reasoning: {
       sql: `fluid_reasoning`,
       type: `avg`,
-      title: `mediaa del indice de razonamiento fluido`,
+      title: `media del indice de razonamiento fluido`,
     },
     media_working_memory: {
       sql: `working_memory`,
       type: `avg`,
-      title: `mediaa del indice de memoria de trabajo`,
+      title: `media del indice de memoria de trabajo`,
     },
     media_processing_speed: {
       sql: `processing_speed`,
       type: `avg`,
-      title: `mediaa del indice de velocidad de procesamiento`,
+      title: `media del indice de velocidad de procesamiento`,
     },
     //stroop
     countStroop: {
@@ -76,17 +76,17 @@ cube(`EvaluacionesDeConsultorio`, {
     media_StroopWord: {
       sql: `stroop_word`,
       type: `avg`,
-      title: `mediaa de Stroop - Palabras `,
+      title: `media de Stroop - Palabras `,
     },
     media_StroopColour: {
       sql: `stroop_colour`,
       type: `avg`,
-      title: `mediaa de Stroop - Colores `,
+      title: `media de Stroop - Colores `,
     },
     media_stroop_word_colour: {
       sql: `stroop_word_colour`,
       type: `avg`,
-      title: `mediaa de Stroop con interferencia - (Palabras y Colores) `,
+      title: `media de Stroop con interferencia - (Palabras y Colores) `,
     },
     //Rey
     countRey: {
@@ -100,7 +100,7 @@ cube(`EvaluacionesDeConsultorio`, {
     media_rey_result: {
       sql: `rey_result`,
       type: `avg`,
-      title: `mediaa de resultados del test de rey`,
+      title: `media de resultados del test de rey`,
     },
     media_rey_percentil: {
       sql: `rey_percentil`,

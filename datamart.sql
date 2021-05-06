@@ -7,13 +7,13 @@ DROP TABLE IF EXISTS demographic CASCADE;
 CREATE TABLE demographic(
 	id_demographic BIGINT UNIQUE NOT NULL,
 	update_date BIGINT NOT NULL,
-    gender CHAR(1) NOT NULL,
-    born_city  VARCHAR(20) NOT NULL,
-	actual_city  VARCHAR(20) NOT NULL,
-	civil_state CHAR(1) NOT NULL,
+    gender TEXT NOT NULL,
+    born_city  TEXT NOT NULL,
+	actual_city  TEXT NOT NULL,
+	civil_state TEXT NOT NULL,
 	socioeconomic_status INT NOT NULL,
     age INT NOT NULL,
-	handedness CHAR(1) NOT NULL,
+	handedness TEXT NOT NULL,
 	scholarship TEXT NOT NULL,
 	PRIMARY KEY(id_demographic, update_date)
 );
@@ -63,7 +63,7 @@ INSERT INTO background values(2222,20190520,true,true,true,true,true,true,true,t
 DROP TABLE IF EXISTS base_disease CASCADE;
 CREATE TABLE base_disease(
 	id_disease SERIAL PRIMARY KEY,
-	type VARCHAR(30) NOT NULL
+	type TEXT NOT NULL
 );
 
 INSERT INTO base_disease values(1111,'alzheimer');
@@ -73,7 +73,7 @@ INSERT INTO base_disease values(3333,'aasdasdas');
 DROP TABLE IF EXISTS medication CASCADE;
 CREATE TABLE medication(
 	id_medication SERIAL PRIMARY KEY,
-	medicine VARCHAR(30) NOT NULL
+	medicine TEXT NOT NULL
 );
 
 INSERT INTO medication values(1111,'acetaminofen');
@@ -148,9 +148,9 @@ CREATE TABLE aphasia(
 	aphasia TEXT NOT NULL
 );
 
-INSERT INTO aphasia values(1111,'Aphasia 1',15);
-INSERT INTO aphasia values(2222,'Apahsia 2',20);
-INSERT INTO aphasia values(3333,'Aphasia 3',25);
+INSERT INTO aphasia values(1111,'Aphasia 1');
+INSERT INTO aphasia values(2222,'Apahsia 2');
+INSERT INTO aphasia values(3333,'Aphasia 3');
 
 
 DROP TABLE IF EXISTS motor_deficit CASCADE;
