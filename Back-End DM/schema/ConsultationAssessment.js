@@ -25,7 +25,7 @@ cube(`EvaluacionesDeConsultorio`, {
   measures: {
     count: {
       sql: `count(*)`,
-      title: `Numero de evaluaciones de consultorio realizadas`,
+      title: `Cantidad de evaluaciones de consultorio realizadas`,
       type: `number`,
       meta: {
         bool: 'true'
@@ -34,7 +34,7 @@ cube(`EvaluacionesDeConsultorio`, {
     countIQ: {
       sql: `iq`,
       type: `count`,
-      title: `Numero de iq registrados`,
+      title: `Cantidad de IQ registrados`,
       filters: [
         { sql: `NOT (${CUBE}.iq IS NULL)` }
       ]
@@ -42,33 +42,33 @@ cube(`EvaluacionesDeConsultorio`, {
     mediaIQ: {
       sql: `iq`,
       type: `avg`,
-      title: `media de resultados IQ`,
+      title: `Media de resultados IQ`,
     },
     media_verbal_comprehension: {
       sql: `verbal_comprehension`,
       type: `avg`,
-      title: `media del indice de comprension verbal`,
+      title: `Media del indice de comprension verbal`,
     },
     media_fluid_reasoning: {
       sql: `fluid_reasoning`,
       type: `avg`,
-      title: `media del indice de razonamiento fluido`,
+      title: `Media del indice de razonamiento fluido`,
     },
     media_working_memory: {
       sql: `working_memory`,
       type: `avg`,
-      title: `media del indice de memoria de trabajo`,
+      title: `Media del indice de memoria de trabajo`,
     },
     media_processing_speed: {
       sql: `processing_speed`,
       type: `avg`,
-      title: `media del indice de velocidad de procesamiento`,
+      title: `Media del indice de velocidad de procesamiento`,
     },
     //stroop
     countStroop: {
-      sql: `iq`,
+      sql: `stroop`,
       type: `count`,
-      title: `Numero de iq registrados`,
+      title: `Numero de Pruebas de stroop registradas`,
       filters: [
         { sql: `NOT (${CUBE}.iq IS NULL)` }
       ]
@@ -76,23 +76,23 @@ cube(`EvaluacionesDeConsultorio`, {
     media_StroopWord: {
       sql: `stroop_word`,
       type: `avg`,
-      title: `media de Stroop - Palabras `,
+      title: `Media de Stroop - Palabras `,
     },
     media_StroopColour: {
       sql: `stroop_colour`,
       type: `avg`,
-      title: `media de Stroop - Colores `,
+      title: `Media de Stroop - Colores `,
     },
     media_stroop_word_colour: {
       sql: `stroop_word_colour`,
       type: `avg`,
-      title: `media de Stroop con interferencia - (Palabras y Colores) `,
+      title: `Media de Stroop con interferencia - (Palabras y Colores) `,
     },
     //Rey
     countRey: {
-      sql: `iq`,
+      sql: ``,
       type: `count`,
-      title: `Numero de iq registrados`,
+      title: `Numero de test de rey registrados`,
       filters: [
         { sql: `NOT (${CUBE}.iq IS NULL)` }
       ]
@@ -100,12 +100,12 @@ cube(`EvaluacionesDeConsultorio`, {
     media_rey_result: {
       sql: `rey_result`,
       type: `avg`,
-      title: `media de resultados del test de rey`,
+      title: `Media de resultados del test de rey`,
     },
     media_rey_percentil: {
       sql: `rey_percentil`,
       type: `avg`,
-      title: `Mediana de los perceptiles obtenidos del test de rey`,
+      title: `Media de los perceptiles obtenidos del test de rey`,
     },
   },
 
