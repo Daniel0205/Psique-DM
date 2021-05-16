@@ -47,7 +47,6 @@ export default function ExploreQueryBuilder({
         pivotConfig,
         updatePivotConfig,
       }) => {
-        console.log(filters)
         return (
           <Fragment>
             <Row

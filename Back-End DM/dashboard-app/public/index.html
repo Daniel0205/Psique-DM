@@ -29,15 +29,6 @@
   <style>
     .ant-dropdown { overflow-y: scroll; max-height: 200px;}
   </style>
-  <script>
-    window.onload = function() {
-      let url = new URL(window.location.href)
-      if(url.searchParams.get("token")!== null){
-        sessionStorage.setItem("token",url.searchParams.get("token"))
-        window.history.replaceState({}, window.location.href, "/" );
-      }
-    }
-  </script>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>

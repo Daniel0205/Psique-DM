@@ -11,8 +11,19 @@ import Header from './components/Header';
 import jwt from 'jsonwebtoken';
 
 
-const API_URL = process.env.REACT_APP_API_URL;
-const CUBEJS_TOKEN = jwt.sign({user:'default'}, process.env.REACT_APP_CUBEJS_API_SECRET);
+const API_URL = process.env.REACT_APP_API_URL; 
+var CUBEJS_TOKEN = ''
+
+
+let url = new URL(window.location.href)
+if(url.searchParams.get("token")!== null){
+  localStorage.setItem("token",url.searchParams.get("token"))
+  window.history.replaceState({}, window.location.href, "/" );
+}
+if(!process.env.REACT_APP_CUBEJS_API_SECRET && !localStorage.token)window.location.replace(process.env.REACT_APP_MAIN_PAGE)
+
+if(process.env.REACT_APP_CUBEJS_API_SECRET)CUBEJS_TOKEN = jwt.sign({user:'default'}, process.env.REACT_APP_CUBEJS_API_SECRET);
+else if(localStorage.token)CUBEJS_TOKEN = localStorage.token
 
 const cubejsApi = cubejs(CUBEJS_TOKEN, {
   apiUrl: API_URL ,
@@ -28,8 +39,6 @@ const AppLayout = ({ children }) => (
     <Layout.Content>{children}</Layout.Content>
   </Layout>
 );
-
-console.log(client)
 
 const App = ({ children }) => (
   <CubeProvider cubejsApi={cubejsApi}>
