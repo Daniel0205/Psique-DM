@@ -101,8 +101,6 @@ const TimeGroup = ({
     </Menu>
   );
 
-  console.log(members)
-
   return (
     <span>
       {members.map((m) => [
