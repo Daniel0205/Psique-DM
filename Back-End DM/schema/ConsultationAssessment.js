@@ -1,6 +1,6 @@
 
 cube(`EvaluacionesDeConsultorio`, {
-  sql: `SELECT * FROM Consultation_assessment NATURAL JOIN date`,
+  sql: `SELECT * FROM consultation_neuropsychological_assessment NATURAL JOIN date`,
 
   joins: {
     Medicacion: {
@@ -101,12 +101,7 @@ cube(`EvaluacionesDeConsultorio`, {
       sql: `rey_result`,
       type: `avg`,
       title: `Media de resultados del test de Rey`,
-    },
-    media_rey_percentil: {
-      sql: `rey_percentil`,
-      type: `avg`,
-      title: `Media de los perceptiles obtenidos del test de Rey`,
-    },
+    }
   },
 
   dimensions: {

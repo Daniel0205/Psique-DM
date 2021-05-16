@@ -1,5 +1,5 @@
 cube(`EvaluacionesDeQuirofano`, {
-  sql: `SELECT * FROM chirurgical_assessment NATURAL JOIN date`,
+  sql: `SELECT * FROM surgery_neuropsychological_assessment NATURAL JOIN date`,
 
   joins: {
     Medicacion: {
