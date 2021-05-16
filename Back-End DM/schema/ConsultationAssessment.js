@@ -90,9 +90,9 @@ cube(`EvaluacionesDeConsultorio`, {
     },
     //Rey
     countRey: {
-      sql: ``,
+      sql: `rey_result`,
       type: `count`,
-      title: `Numero de test de rey registrados`,
+      title: `Numero de Prueba de Rey registrados`,
       filters: [
         { sql: `NOT (${CUBE}.iq IS NULL)` }
       ]
@@ -100,12 +100,12 @@ cube(`EvaluacionesDeConsultorio`, {
     media_rey_result: {
       sql: `rey_result`,
       type: `avg`,
-      title: `Media de resultados del test de rey`,
+      title: `Media de resultados del test de Rey`,
     },
     media_rey_percentil: {
       sql: `rey_percentil`,
       type: `avg`,
-      title: `Media de los perceptiles obtenidos del test de rey`,
+      title: `Media de los perceptiles obtenidos del test de Rey`,
     },
   },
 
