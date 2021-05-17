@@ -5,8 +5,8 @@ cube(`DeficitMotor`, {
   },
   
   dimensions: {
-    id_motor_deficit: {
-      sql: `deficit`,
+    id_deficit: {
+      sql: `id_deficit`,
       type: `number`,
       primaryKey: true
     },
