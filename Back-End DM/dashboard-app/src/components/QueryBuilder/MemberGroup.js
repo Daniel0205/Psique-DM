@@ -24,7 +24,7 @@ const MemberGroup = ({
         </MemberDropdown>
       </RemoveButtonGroup>
     ))}
-    {!members.length && (
+    {(!members.length || addMemberName === "Variables secundarias" )&& (
       <MemberDropdown
       onClick={(m) => updateMethods.add(m)}
       availableMembers={availableMembers}
