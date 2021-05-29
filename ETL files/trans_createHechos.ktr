@@ -1881,9 +1881,8 @@ if( yearsAge &lt; 6 ) {
 var tabla = ''
 var tabletoCalculate = ''
 
-var resultsWISC = {"DC":5,"SE":5,"RD":5, "CD":5, "CL":5, "VB":5, "NL":5, "MT":5, "CM":5, "BS":5, "FI":5, "RG":5, "IN":5, "AR":5, "PC":5}
-
-var resultsWAIS = {"C":5, "S":5, "D":5, "M":5, "V":5, "A":5, "BS":5, "PV":5, "I":5, "CN":5, "LN":5, "B":5, "CO":5, "CA":5, "FI":5 }
+var resultsWISC = {"DC":cube_design,"SE":similarities,"RD":digits, "CD":draw_concepts, "CL":keys, "VB":vocabulary, "NL":numbers_letters, "MT":matrices, "CM":comprehension, "BS":symbol_search, "FI":incomplete_figures, "RG":records, "IN":information, "AR":arithmetic, "PC":clues}
+var resultsWAIS = {"C":cube_design_1, "S":similarities_1, "D":digits_1, "M":matrices_1, "V":vocabulary_1, "A":arithmetic_1, "BS":symbol_search_1, "PV":puzzles, "I":information_1, "CN":number_keys, "LN":numbers_letters_1, "B":balances, "CO":comprehension_1, "CA":cancelation, "FI":incomplete_figures_1 }
 
 
 var resWechsler = yearsAge &lt; 16 ? resultsWISC : resultsWAIS
