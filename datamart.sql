@@ -18,9 +18,9 @@ CREATE TABLE demographic(
 	PRIMARY KEY(id_demographic, update_date)
 );
 
-INSERT INTO demographic values(1111,20190520,'M','Cali','Medellin','S',2,19,'L','T');
-INSERT INTO demographic values(2222,20190520,'F','Bogota','Bogota','C',3,23,'R','U');
-INSERT INTO demographic values(3333,20190520,'N','Medellin','Pasto','D',4,22,'L','B');
+INSERT INTO demographic values(1111,20190520,'Masculino','Cali','Medellin','Soltero',2,19,'Izquierda','Tecnico');
+INSERT INTO demographic values(2222,20190520,'Femenino','Bogota','Bogota','Casado',3,23,'Derecha','Universitario');
+INSERT INTO demographic values(3333,20190520,'No binario','Medellin','Pasto','Divorciado',4,22,'Izquierda','Bachiller');
 
 
 
@@ -66,9 +66,9 @@ CREATE TABLE cognitive_disease(
 	type TEXT NOT NULL
 );
 
-INSERT INTO cognitive_disease values(1111,'alzheimer');
-INSERT INTO cognitive_disease values(2222,'epilepsia');
-INSERT INTO cognitive_disease values(3333,'aasdasdas');
+INSERT INTO cognitive_disease values(1111,'Alzheimer');
+INSERT INTO cognitive_disease values(2222,'Epilepsia');
+INSERT INTO cognitive_disease values(3333,'Parkinson');
 
 DROP TABLE IF EXISTS medication CASCADE;
 CREATE TABLE medication(
@@ -76,9 +76,9 @@ CREATE TABLE medication(
 	medicine TEXT NOT NULL
 );
 
-INSERT INTO medication values(1111,'acetaminofen');
-INSERT INTO medication values(2222,'loratadina');
-INSERT INTO medication values(3333,'asdad');
+INSERT INTO medication values(1111,'Acetaminofen');
+INSERT INTO medication values(2222,'Loratadina');
+INSERT INTO medication values(3333,'Rivastigmina ');
 
 DROP TABLE IF EXISTS date CASCADE;
 CREATE TABLE date(
@@ -88,9 +88,14 @@ CREATE TABLE date(
 	year INT NOT NULL
 );
 
-INSERT INTO date values(1111,15,09,2019);
-INSERT INTO date values(2222,15,10,2018);
-INSERT INTO date values(3333,30,12,2012);
+INSERT INTO date values(20210231,31,10,2020);
+INSERT INTO date values(20211101,01,11,2020);
+INSERT INTO date values(20211231,31,12,2020);
+INSERT INTO date values(20191509,15,01,2021);
+INSERT INTO date values(20210205,05,02,2021);
+INSERT INTO date values(20210328,28,03,2021);
+INSERT INTO date values(20210420,20,04,2021);
+INSERT INTO date values(20210512,12,05,2021);
 
 DROP TABLE IF EXISTS consultation_neuropsychological_assessment CASCADE;
 CREATE TABLE consultation_neuropsychological_assessment(
@@ -119,13 +124,16 @@ CREATE TABLE consultation_neuropsychological_assessment(
 );
 
 
-INSERT INTO consultation_neuropsychological_assessment values(1111,1111,20190520,1111,20190520,1111,1111,1111,1,1,1,1,1,1,1,1,1);
-INSERT INTO consultation_neuropsychological_assessment values(2222,2222,20190520,2222,20190520,2222,2222,1111,2,2,2,2,2,2,2,2,2);
-INSERT INTO consultation_neuropsychological_assessment values(3333,3333,20190520,3333,20190520,3333,3333,1111,3,3,3,3,null,3,3,3,3);
-INSERT INTO consultation_neuropsychological_assessment values(4444,1111,20190520,1111,20190520,3333,3333,2222,3,3,3,3,3,3,3,3,3);
-INSERT INTO consultation_neuropsychological_assessment values(5555,1111,20190520,1111,20190520,2222,3333,2222,3,3,null,null,null,null,3,3,3);
-INSERT INTO consultation_neuropsychological_assessment values(6666,2222,20190520,2222,20190520,2222,3333,3333,3,3,3,3,3,3,3,3,3);
-INSERT INTO consultation_neuropsychological_assessment values(7777,3333,20190520,2222,20190520,2222,3333,3333,3,3,3,3,3,null,3,null,3);
+
+
+INSERT INTO consultation_neuropsychological_assessment values(1111,1111,20190520,1111,20190520,1111,1111,20210231,90,11,1,1,1,1,1,1,1);
+INSERT INTO consultation_neuropsychological_assessment values(2222,2222,20190520,2222,20190520,2222,2222,20211101,110,2,2,2,2,2,2,2,2);
+INSERT INTO consultation_neuropsychological_assessment values(3333,3333,20190520,3333,20190520,3333,3333,20211231,80,3,3,3,null,3,3,3,3);
+INSERT INTO consultation_neuropsychological_assessment values(4444,1111,20190520,1111,20190520,3333,3333,20191509,78,3,3,3,3,3,3,3,3);
+INSERT INTO consultation_neuropsychological_assessment values(5555,1111,20190520,1111,20190520,2222,3333,20210205,95,3,null,null,null,null,3,3,3);
+INSERT INTO consultation_neuropsychological_assessment values(6666,2222,20190520,2222,20190520,2222,3333,20210328,110,3,3,3,3,3,3,3,3);
+INSERT INTO consultation_neuropsychological_assessment values(7777,3333,20190520,2222,20190520,2222,3333,20210420,130,3,3,3,3,null,3,null,3);
+INSERT INTO consultation_neuropsychological_assessment values(8888,3333,20190520,2222,20190520,2222,3333,20210512,60,3,3,3,3,null,3,null,3);
 
 
 /* WADAAAAAAAAAAAAAAAAAAAAAAAAAA */
@@ -148,9 +156,9 @@ CREATE TABLE aphasia(
 	aphasia TEXT NOT NULL
 );
 
-INSERT INTO aphasia values(1111,'Aphasia 1');
-INSERT INTO aphasia values(2222,'Apahsia 2');
-INSERT INTO aphasia values(3333,'Aphasia 3');
+INSERT INTO aphasia values(1111,'Afasia aferente');
+INSERT INTO aphasia values(2222,'Afasia eferente');
+INSERT INTO aphasia values(3333,'Afasia mixta');
 
 
 DROP TABLE IF EXISTS motor_deficit CASCADE;
@@ -160,9 +168,10 @@ CREATE TABLE motor_deficit(
 );
 
 
-INSERT INTO motor_deficit values(1111,'Deficit 1');
-INSERT INTO motor_deficit values(2222,'Deficit 2');
-INSERT INTO motor_deficit values(3333,'Deficit 3');
+INSERT INTO motor_deficit values(1111,'Paresia de miembro superior');
+INSERT INTO motor_deficit values(2222,'Oftalmoplegia');
+INSERT INTO motor_deficit values(3333,'Paralisis facial');
+INSERT INTO motor_deficit values(4444,'Disartria');
 
 DROP TABLE IF EXISTS surgery_neuropsychological_assessment CASCADE;
 CREATE TABLE surgery_neuropsychological_assessment(
@@ -191,10 +200,11 @@ CREATE TABLE surgery_neuropsychological_assessment(
 );
 
 
-INSERT INTO surgery_neuropsychological_assessment values(11111,1111,20190520,1111,20190520,1111,1111,1111,1111,1111,1111,0.8);
-INSERT INTO surgery_neuropsychological_assessment values(22222,2222,20190520,2222,20190520,2222,2222,1111,1111,1111,1111,0.5);
-INSERT INTO surgery_neuropsychological_assessment values(333333,3333,20190520,3333,20190520,3333,3333,1111,1111,1111,1111,0.5);
-INSERT INTO surgery_neuropsychological_assessment values(444444,1111,20190520,1111,20190520,3333,3333,2222,1111,1111,1111,0.5);
-INSERT INTO surgery_neuropsychological_assessment values(55555,1111,20190520,1111,20190520,2222,3333,2222,1111,1111,1111,0.7);
-INSERT INTO surgery_neuropsychological_assessment values(66666,2222,20190520,2222,20190520,2222,3333,3333,1111,1111,1111,0.5);
-INSERT INTO surgery_neuropsychological_assessment values(777777,3333,20190520,2222,20190520,2222,3333,3333,1111,1111,1111,0.5);
+INSERT INTO surgery_neuropsychological_assessment values(11111,1111,20190520,1111,20190520,1111,1111,20210231,1111,1111,1111,0.8);
+INSERT INTO surgery_neuropsychological_assessment values(22222,2222,20190520,2222,20190520,2222,2222,20211101,1111,1111,1111,0.5);
+INSERT INTO surgery_neuropsychological_assessment values(333333,3333,20190520,3333,20190520,3333,3333,20211231,1111,1111,1111,0.5);
+INSERT INTO surgery_neuropsychological_assessment values(444444,1111,20190520,1111,20190520,3333,3333,20191509,1111,1111,1111,0.5);
+INSERT INTO surgery_neuropsychological_assessment values(55555,1111,20190520,1111,20190520,2222,3333,20210205,1111,1111,1111,0.7);
+INSERT INTO surgery_neuropsychological_assessment values(66666,2222,20190520,2222,20190520,2222,3333,20210328,1111,1111,1111,0.5);
+INSERT INTO surgery_neuropsychological_assessment values(777777,3333,20190520,2222,20190520,2222,3333,20210420,1111,1111,1111,0.5);
+INSERT INTO surgery_neuropsychological_assessment values(888888,3333,20190520,2222,20190520,2222,3333,20210512,1111,1111,1111,0.5);

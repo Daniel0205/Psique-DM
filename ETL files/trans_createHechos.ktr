@@ -491,6 +491,61 @@
       </attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>PsiqueDM</name>
+    <server>ec2-54-145-102-149.compute-1.amazonaws.com</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>dafedg5oq0b3bi</database>
+    <port>5432</port>
+    <username>uhiumvyjuxipyl</username>
+    <password>Encrypted 33343730313438656163383932366131633763626634396166373165643737333762386365393738373735303035386087abcbad59c6c386ad40ab758696f68e</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>EXTRA_OPTION_POSTGRESQL.sslmode</code>
+        <attribute>require</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>5432</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <order>
     <hop>
       <from>Extract consultation fact</from>
@@ -537,7 +592,51 @@
       <to>Filter rows 2</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>DM last date</from>
+      <to>Extract consultation fact</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DM last date</from>
+      <to>Extract chirurgical assessment fact</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>DM last date</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>PsiqueDM</connection>
+    <sql>(SELECT make_date(year, month, day) as last_date FROM date ORDER BY year DESC, month DESC, day DESC LIMIT 1)
+union all 
+select make_date(1800,02,05)  as last_date
+where not exists (SELECT make_date(year, month, day) as last_date FROM date ORDER BY year DESC, month DESC, day DESC LIMIT 1);</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Extract chirurgical assessment fact</name>
     <type>TableInput</type>
@@ -609,10 +708,11 @@ LEFT JOIN stage ON wada.id_stage = stage.id_stage)
 ON patient.id_patient = assessment.id_patient
 AND id_background IS NOT NULL AND
 wada.counting IS NOT NULL OR wada.denomination IS NOT NULL OR wada.lecture IS NOT NULL OR wada.repetition IS NOT NULL
-OR wada.verbal_instructions IS NOT NULL OR wada.follow_instructions IS NOT NULL;</sql>
+OR wada.verbal_instructions IS NOT NULL OR wada.follow_instructions IS NOT NULL
+AND assessment.start_date > ? ;</sql>
     <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
+    <lookup>DM last date</lookup>
+    <execute_each_row>Y</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema />
@@ -623,8 +723,8 @@ OR wada.verbal_instructions IS NOT NULL OR wada.follow_instructions IS NOT NULL;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>288</yloc>
+      <xloc>320</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -667,11 +767,12 @@ LEFT JOIN wisc ON wisc.id_test = test.id_test)
 LEFT JOIN  wais ON wais.id_test = test.id_test)
 LEFT JOIN  rey ON rey.id_test = test.id_test)
 LEFT JOIN  stroop ON stroop.id_test = test.id_test)
-ON patient.id_patient = assessment.id_patient
+ON patient.id_patient = assessment.id_patient AND 
+assessment.start_date > ?;
 </sql>
     <limit>0</limit>
-    <lookup />
-    <execute_each_row>N</execute_each_row>
+    <lookup>DM last date</lookup>
+    <execute_each_row>Y</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema />
@@ -682,8 +783,8 @@ ON patient.id_patient = assessment.id_patient
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
-      <yloc>160</yloc>
+      <xloc>320</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -716,8 +817,8 @@ ON patient.id_patient = assessment.id_patient
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>288</yloc>
+      <xloc>832</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -759,8 +860,8 @@ ON patient.id_patient = assessment.id_patient
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
-      <yloc>160</yloc>
+      <xloc>928</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1984,8 +2085,8 @@ CIT = calcularCIT()
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>160</yloc>
+      <xloc>496</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2039,8 +2140,8 @@ if(wada_result>1 || wada_result&lt;0){
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
-      <yloc>288</yloc>
+      <xloc>528</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2098,8 +2199,8 @@ existsFacts = false;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
-      <yloc>160</yloc>
+      <xloc>816</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2155,8 +2256,8 @@ existsFacts = false;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>288</yloc>
+      <xloc>688</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2200,8 +2301,8 @@ existsFacts = false;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>160</yloc>
+      <xloc>656</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2397,8 +2498,8 @@ existsFacts = false;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>880</xloc>
-      <yloc>288</yloc>
+      <xloc>976</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2654,8 +2755,8 @@ existsFacts = false;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
-      <yloc>160</yloc>
+      <xloc>1104</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
